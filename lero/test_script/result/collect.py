@@ -39,7 +39,7 @@ def extract_id_and_execution_time(input_file, output_file):
 
 
 if __name__ == '__main__':
-    input_file = 'stats_sever.txt'  # Change to your input file path
+    input_file = 'stats_mid.txt'  # Change to your input file path
     output_file = 'output.txt'  # Change to your desired output file path
     extract_id_and_execution_time(input_file, output_file)
     print(f"Results have been written to {output_file}")
