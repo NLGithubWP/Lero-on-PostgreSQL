@@ -18,4 +18,5 @@ RUN apt-get update && \
 WORKDIR /usr/src/app
 
 # Command to run on container start
-CMD ["bash"]
+CMD ["tail", "-f", "/dev/null"]
+
