@@ -7,6 +7,8 @@ LABEL maintainer="yourname@example.com"
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 
+RUN apt-get install -y ca-certificates
+
 # Install certificates and update package lists
 RUN apt-get update && \
     apt-get install -y --no-install-recommends --allow-unauthenticated \
