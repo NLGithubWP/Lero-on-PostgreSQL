@@ -23,8 +23,8 @@ def run_query(q, run_args):
             for arg in run_args:
                 cur.execute(arg)
         cur.execute("SET statement_timeout TO " + str(TIMEOUT))
-        print(run_args)
-        print(q)
+        # print(run_args)
+        # print(q)
         cur.execute(q)
         result = cur.fetchall()
     finally:

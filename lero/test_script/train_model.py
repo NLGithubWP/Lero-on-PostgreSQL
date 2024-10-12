@@ -91,7 +91,7 @@ class LeroHelper():
         s.sendall(bytes(json_str + "*LERO_END*", "utf-8"))
         reply_json = s.recv(1024)
         s.close()
-        print(reply_json)
+        # print(reply_json)
         os.system("sync")
 
     def test_benchmark(self, output_file):
