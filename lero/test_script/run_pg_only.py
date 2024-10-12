@@ -39,15 +39,18 @@ try:
         query_id = query_id.strip()
 
         if query_id.startswith("q") and 1 <= int(query_id[1:]) <= 22:
-            explain_query = f"EXPLAIN (ANALYZE, TIMING, VERBOSE, COSTS, SUMMARY, FORMAT JSON) {query}"
-            cursor.execute(explain_query)
-            explain_result = cursor.fetchall()[0][0]
-            execution_time = explain_result[0].get("Execution Time", "N/A")
+            try:
+                explain_query = f"EXPLAIN (ANALYZE, TIMING, VERBOSE, COSTS, SUMMARY, FORMAT JSON) {query}"
+                cursor.execute(explain_query)
+                explain_result = cursor.fetchall()[0][0]
+                execution_time = explain_result[0].get("Execution Time", "N/A")
 
-            # Store the result in the dictionary
-            execution_times[query_id] = execution_time
+                # Store the result in the dictionary
+                execution_times[query_id] = execution_time
+            except:
+                execution_times[query_id] = "failed"
 
-    # Sort the queries by their ID (q1 to q22)
+                # Sort the queries by their ID (q1 to q22)
     for query_id in sorted(execution_times.keys(), key=lambda x: int(x[1:])):
         print(f"Execution Time for {query_id}: {execution_times[query_id]} ms")
 
