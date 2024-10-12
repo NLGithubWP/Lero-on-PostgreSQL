@@ -3,7 +3,7 @@ PORT = 5432
 HOST = "localhost"
 USER = "postgres"
 PASSWORD = "123"
-DB = "tpch"
+DB = "tpch1"
 CONNECTION_STR = "dbname=" + DB + " user=" + USER + " password=" + PASSWORD + " host=localhost port=" + str(PORT)
 TIMEOUT = 30000000
 # [important]
