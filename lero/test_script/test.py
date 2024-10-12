@@ -1,4 +1,5 @@
 import argparse
+import traceback
 
 from utils import *
 
@@ -19,4 +20,10 @@ if __name__ == "__main__":
     print("Read", len(test_queries), "test queries.")
 
     for (fp, q) in test_queries:
-        do_run_query(q, fp, ["SET enable_lero TO True"], args.output_query_latency_file, True, None, None)
+        try:
+            do_run_query(q, fp, ["SET enable_lero TO True"], args.output_query_latency_file, True, None, None)
+        except:
+            print('Error', fp)
+            traceback.print_exc()
+
+
