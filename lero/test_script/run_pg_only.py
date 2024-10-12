@@ -20,6 +20,9 @@ TIMEOUT = 30000000
 # File with SQL queries
 SQL_FILE_PATH = "q_test_0_merge.txt"  # Replace with the path to your SQL file
 
+# Dictionary to store execution times for each query
+execution_times = {}
+
 try:
     # Connect to PostgreSQL database
     connection = psycopg2.connect(CONNECTION_STR)
@@ -39,12 +42,14 @@ try:
             explain_query = f"EXPLAIN (ANALYZE, TIMING, VERBOSE, COSTS, SUMMARY, FORMAT JSON) {query}"
             cursor.execute(explain_query)
             explain_result = cursor.fetchall()[0][0]
-            # print(explain_result)
-            # explain_data = json.loads(explain_result[0])
-            # print(explain_data)
-            execution_time = explain_result[0].get("Execution Time", "N/A")
-            # print(f"\nExplanation for {query_id}:\n", json.dumps(explain_data, indent=2))
-            print(f"Execution Time for {query_id}: {execution_time} ms")
+            execution_time = explain_result.get("Execution Time", "N/A")
+
+            # Store the result in the dictionary
+            execution_times[query_id] = execution_time
+
+    # Sort the queries by their ID (q1 to q22)
+    for query_id in sorted(execution_times.keys(), key=lambda x: int(x[1:])):
+        print(f"Execution Time for {query_id}: {execution_times[query_id]} ms")
 
 except psycopg2.Error as e:
     print("Error: Unable to connect or execute the SQL query")
