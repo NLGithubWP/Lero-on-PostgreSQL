@@ -7,20 +7,12 @@ LABEL maintainer="yourname@example.com"
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install certificates, gnupg, and manually add GPG keys
+# Install certificates and update package lists
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt-get install -y --no-install-recommends --allow-unauthenticated \
     ca-certificates \
-    gnupg \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32 && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# Update and install any needed packages
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
     curl \
+    gnupg \
     build-essential \
     libreadline-dev \
     zlib1g-dev \
