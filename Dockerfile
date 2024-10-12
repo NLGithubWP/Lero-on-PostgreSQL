@@ -12,6 +12,8 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     curl \
     ca-certificates \
+    gnupg \
+    && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
     && rm -rf /var/lib/apt/lists/*
 
 # Set work directory
@@ -19,4 +21,3 @@ WORKDIR /usr/src/app
 
 # Command to run on container start
 CMD ["tail", "-f", "/dev/null"]
-
