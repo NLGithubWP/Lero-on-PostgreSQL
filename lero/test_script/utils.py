@@ -135,7 +135,8 @@ def do_run_query(sql, query_name, run_args, latency_file, write_latency_file = T
         encoded_q_str = encode_str(sql)
         previous_result = get_history(encoded_q_str, cur_plan_str, encoded_plan_str)
         if previous_result is not None:
-            latency_json = json.loads(previous_result)
+            # latency_json = json.loads(previous_result)
+            pass
         else:
             if manager_dict is not None and manager_lock is not None:
                 manager_lock.acquire()
