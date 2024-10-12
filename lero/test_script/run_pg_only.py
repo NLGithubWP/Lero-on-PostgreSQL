@@ -18,7 +18,7 @@ CONNECTION_STR = f"dbname={DB} user={USER} password={PASSWORD} host={HOST} port=
 TIMEOUT = 30000000
 
 # File with SQL queries
-SQL_FILE_PATH = "sql_queries.txt"  # Replace with the path to your SQL file
+SQL_FILE_PATH = "q_test_0_merge.txt"  # Replace with the path to your SQL file
 
 try:
     # Connect to PostgreSQL database
