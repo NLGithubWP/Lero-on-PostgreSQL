@@ -1,9 +1,10 @@
+(ai4db) root@145efaf89057:/code/AI4QueryOptimizer/baseline/Lero/lero/test_script# python test.py --query_path q_test_0_merge.txt --output_query_latency_file q_test_1_merge.test
 Read 22 test queries.
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
 visit histroy path:  ./log/query_latency/e348a37a91d2ee90c1fb779307dbaa02/cbc88b3688f5210dddd4fe66677d4d16
 get the history file: ./log/query_latency/e348a37a91d2ee90c1fb779307dbaa02/cbc88b3688f5210dddd4fe66677d4d16
-1728735396.626061 q0 0.288
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
+1728736363.60762 q0 0.288
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
 Error q1
 Traceback (most recent call last):
   File "test.py", line 24, in <module>
@@ -14,11 +15,11 @@ Traceback (most recent call last):
     cur.execute(q)
 psycopg2.errors.InternalError_: fail to get score from Lero
 
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/45ad09986c24ca6cc81026607b6979a8/87a312276757a532803cc50ef7f3e068
-1728735397.0165944 q2 134.41
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+visit histroy path:  ./log/query_latency/45ad09986c24ca6cc81026607b6979a8/87a312276757a532803cc50ef7f3e068
+get the history file: ./log/query_latency/45ad09986c24ca6cc81026607b6979a8/87a312276757a532803cc50ef7f3e068
+1728736364.2430415 q2 134.41
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
 Error q3
 Traceback (most recent call last):
   File "test.py", line 24, in <module>
@@ -29,15 +30,15 @@ Traceback (most recent call last):
     cur.execute(q)
 psycopg2.errors.InternalError_: fail to get score from Lero
 
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/113fcfe8e2c000c1fae1faa212fc6140/4af0e6e31ca19afa61f249fe2dcf64d0
-1728735397.365596 q4 60.659
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/e047ada2329073f8409ba77d0dfefbe2/04e0b04fc603f220830c2a7d6afdb6ad
-1728735398.1628783 q5 579.514
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+visit histroy path:  ./log/query_latency/113fcfe8e2c000c1fae1faa212fc6140/4af0e6e31ca19afa61f249fe2dcf64d0
+get the history file: ./log/query_latency/113fcfe8e2c000c1fae1faa212fc6140/4af0e6e31ca19afa61f249fe2dcf64d0
+1728736364.551261 q4 60.659
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+save history: ./log/query_latency/e047ada2329073f8409ba77d0dfefbe2/de98c6243e2131c940a9ba2c815e9d40
+1728736367.5497591 q5 2657.864
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
 Error q8
 Traceback (most recent call last):
   File "test.py", line 24, in <module>
@@ -48,15 +49,15 @@ Traceback (most recent call last):
     cur.execute(q)
 psycopg2.errors.InternalError_: fail to init Lero
 
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/da8c087cc9127b55832192e6bf01ddb6/a6fa07e9da4cb8ebdee54b53ca9cc1ba
-1728735398.5247927 q9 40.884
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/322fa39d5773b8fd7a9093a717bbf9ea/92425325ec20fdd3411297ce7b5fc599
-1728735398.91659 q10 50.371
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+save history: ./log/query_latency/da8c087cc9127b55832192e6bf01ddb6/a58e896b4c6be737c7925bd0bf107377
+1728736368.1334982 q9 63.217
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+visit histroy path:  ./log/query_latency/322fa39d5773b8fd7a9093a717bbf9ea/92425325ec20fdd3411297ce7b5fc599
+get the history file: ./log/query_latency/322fa39d5773b8fd7a9093a717bbf9ea/92425325ec20fdd3411297ce7b5fc599
+1728736368.2403169 q10 50.371
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
 Error q11
 Traceback (most recent call last):
   File "test.py", line 24, in <module>
@@ -67,15 +68,15 @@ Traceback (most recent call last):
     cur.execute(q)
 psycopg2.errors.InternalError_: fail to init Lero
 
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/5ca4587a9e2351cd01bfabddfaf61c9c/1316492b8ea2afd4c0a671f3d9249da7
-1728735406.2659163 q13 6922.187
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/0b6980fa371c6152c8d2b1de22fd683b/673663f8414989c781278d0904817c17
-1728735407.7187958 q14 1279.548
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+save history: ./log/query_latency/5ca4587a9e2351cd01bfabddfaf61c9c/47134c316050598fc99141d4bf93dd16
+1728736369.343536 q13 455.309
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+visit histroy path:  ./log/query_latency/0b6980fa371c6152c8d2b1de22fd683b/673663f8414989c781278d0904817c17
+get the history file: ./log/query_latency/0b6980fa371c6152c8d2b1de22fd683b/673663f8414989c781278d0904817c17
+1728736369.468997 q14 1279.548
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
 Error q15
 Traceback (most recent call last):
   File "test.py", line 24, in <module>
@@ -88,11 +89,11 @@ psycopg2.errors.UndefinedTable: relation "revenue_test" does not exist
 LINE 1: ... s_address, s_phone, total_revenue from supplier, revenue_te...
                                                              ^
 
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/f68907db36fdc6079d213215a895c7fa/1970ab47c238a85c7de25256a553941a
-1728735408.0390668 q16 55.848
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+visit histroy path:  ./log/query_latency/f68907db36fdc6079d213215a895c7fa/1970ab47c238a85c7de25256a553941a
+get the history file: ./log/query_latency/f68907db36fdc6079d213215a895c7fa/1970ab47c238a85c7de25256a553941a
+1728736369.5753589 q16 55.848
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
 Error q17
 Traceback (most recent call last):
   File "test.py", line 24, in <module>
@@ -105,31 +106,31 @@ psycopg2.errors.SyntaxError: syntax error at or near "["
 LINE 1: ...(COSTS FALSE, FORMAT JSON, SUMMARY) select p_bran![](test.jp...
                                                              ^
 
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/15a2f292745f2fc49a5601d7b81b8812/784149df8fd1d21cf8f540f1b4b9e81d
-1728735409.6951199 q18 1408.628
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/85e63a852d1dc56504fcb88d3e7c0c48/7702caacfd5f005960fd6a7c3b3fe397
-1728735411.309649 q19 1436.85
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/1aa377b84cc9b41bfcd42d8725633077/a738ff5fb015353b829b6f486e616493
-1728735411.6610613 q20 0.145
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/314edcfc045036f9820a2c28059e70cf/d6fcdc01749bbfa35ffa60a38d099b8f
-1728735412.2293665 q12 0.15
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/8a4b512452b843bb4b6803706ee94499/016561ec1995970770411661b501f6aa
-1728735412.7226448 q6 11.1
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/7aef7012d11645664336f1e2e30756e9/e247a1564f19c38b8fabd18120601133
-1728735413.1339934 q7 0.143
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-connecting to db with  dbname=tpch user=postgres password=123 host=localhost port=5432
-save history: ./log/query_latency/4585a1f9a8084398410f5bb80c225b49/7dc85440529906c6da6704fba9bdf56c
-1728735414.193743 q21 742.672
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+visit histroy path:  ./log/query_latency/15a2f292745f2fc49a5601d7b81b8812/784149df8fd1d21cf8f540f1b4b9e81d
+get the history file: ./log/query_latency/15a2f292745f2fc49a5601d7b81b8812/784149df8fd1d21cf8f540f1b4b9e81d
+1728736369.683296 q18 1408.628
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+visit histroy path:  ./log/query_latency/85e63a852d1dc56504fcb88d3e7c0c48/7702caacfd5f005960fd6a7c3b3fe397
+get the history file: ./log/query_latency/85e63a852d1dc56504fcb88d3e7c0c48/7702caacfd5f005960fd6a7c3b3fe397
+1728736369.7630293 q19 1436.85
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+visit histroy path:  ./log/query_latency/1aa377b84cc9b41bfcd42d8725633077/a738ff5fb015353b829b6f486e616493
+get the history file: ./log/query_latency/1aa377b84cc9b41bfcd42d8725633077/a738ff5fb015353b829b6f486e616493
+1728736369.9135244 q20 0.145
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+visit histroy path:  ./log/query_latency/314edcfc045036f9820a2c28059e70cf/d6fcdc01749bbfa35ffa60a38d099b8f
+get the history file: ./log/query_latency/314edcfc045036f9820a2c28059e70cf/d6fcdc01749bbfa35ffa60a38d099b8f
+1728736370.266755 q12 0.15
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+visit histroy path:  ./log/query_latency/8a4b512452b843bb4b6803706ee94499/016561ec1995970770411661b501f6aa
+get the history file: ./log/query_latency/8a4b512452b843bb4b6803706ee94499/016561ec1995970770411661b501f6aa
+1728736370.5271926 q6 11.1
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+visit histroy path:  ./log/query_latency/7aef7012d11645664336f1e2e30756e9/e247a1564f19c38b8fabd18120601133
+get the history file: ./log/query_latency/7aef7012d11645664336f1e2e30756e9/e247a1564f19c38b8fabd18120601133
+1728736370.7595296 q7 0.143
+connecting to db with  dbname=tpch1 user=postgres password=123 host=localhost port=5432
+visit histroy path:  ./log/query_latency/4585a1f9a8084398410f5bb80c225b49/7dc85440529906c6da6704fba9bdf56c
+get the history file: ./log/query_latency/4585a1f9a8084398410f5bb80c225b49/7dc85440529906c6da6704fba9bdf56c
+1728736370.9065933 q21 742.672
