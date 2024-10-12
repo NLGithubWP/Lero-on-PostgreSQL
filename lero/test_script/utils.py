@@ -13,6 +13,7 @@ def encode_str(s):
         
 def run_query(q, run_args):
     start = time()
+    print("connecting to db with ", CONNECTION_STR)
     conn = psycopg2.connect(CONNECTION_STR)
     conn.set_client_encoding('UTF8')
     result = None
