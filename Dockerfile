@@ -13,7 +13,11 @@ RUN apt-get update && \
     curl \
     ca-certificates \
     gnupg \
-    && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
+    build-essential \
+    libreadline-dev \
+    zlib1g-dev \
+    vim \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 
 # Set work directory
