@@ -40,9 +40,9 @@ try:
             cursor.execute(explain_query)
             explain_result = cursor.fetchall()[0][0]
             print(explain_result)
-            explain_data = json.loads(explain_result)
-            print(explain_data)
-            execution_time = explain_data[0].get("Execution Time", "N/A")
+            # explain_data = json.loads(explain_result[0])
+            # print(explain_data)
+            execution_time = explain_result[0].get("Execution Time", "N/A")
             # print(f"\nExplanation for {query_id}:\n", json.dumps(explain_data, indent=2))
             print(f"Execution Time for {query_id}: {execution_time} ms")
 
