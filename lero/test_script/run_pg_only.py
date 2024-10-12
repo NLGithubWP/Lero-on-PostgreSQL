@@ -42,7 +42,7 @@ try:
             explain_query = f"EXPLAIN (ANALYZE, TIMING, VERBOSE, COSTS, SUMMARY, FORMAT JSON) {query}"
             cursor.execute(explain_query)
             explain_result = cursor.fetchall()[0][0]
-            execution_time = explain_result.get("Execution Time", "N/A")
+            execution_time = explain_result[0].get("Execution Time", "N/A")
 
             # Store the result in the dictionary
             execution_times[query_id] = execution_time
