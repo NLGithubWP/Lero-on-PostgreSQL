@@ -7,18 +7,25 @@ LABEL maintainer="yourname@example.com"
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Install certificates and update package lists
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    ca-certificates \
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Update and install any needed packages
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     curl \
-    ca-certificates \
     gnupg \
     build-essential \
     libreadline-dev \
     zlib1g-dev \
     vim \
     wget \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set work directory
 WORKDIR /usr/src/app
