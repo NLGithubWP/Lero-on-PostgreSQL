@@ -118,7 +118,7 @@ def create_training_file(training_data_file, *latency_files):
 
 def do_run_query(sql, query_name, run_args, latency_file, write_latency_file = True, manager_dict = None, manager_lock = None):
     sql = sql.strip().replace("\n", " ").replace("\t", " ")
-
+    print("executing sql:", sql)
     # 1. run query with pg hint
     _, plan_json = run_query("EXPLAIN (COSTS FALSE, FORMAT JSON, SUMMARY) " + sql, run_args)
     plan_json = plan_json[0][0]
