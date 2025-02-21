@@ -110,6 +110,7 @@ class LeroHelper():
         return run_args
 
     def run_pairwise(self, q, fp, run_args, output_query_latency_file, exploratory_query_latency_file, pool):
+        print(f"------------ Explaining the query {q} ------------")
         explain_query(q, run_args)
         policy_entities = []
         with open(self.lero_card_file_path, 'r') as f:
