@@ -27,6 +27,7 @@ class PgHelper():
 
     def start(self, pool_num):
         pool = Pool(pool_num)
+        print("---------------- starts PgHelper ----------------")
         for fp, q in self.queries:
             pool.apply_async(do_run_query, args=(q, fp, [], self.output_query_latency_file, True, None, None))
         print('Waiting for all subprocesses done...')
@@ -55,6 +56,7 @@ class LeroHelper():
         lero_chunks = list(self.chunks(self.queries, self.query_num_per_chunk))
 
         run_args = self.get_run_args()
+        print("---------------- starts LeroHelper ----------------")
         for c_idx, chunk in enumerate(lero_chunks):
             pool = Pool(pool_num)
             for fp, q in chunk:
@@ -110,6 +112,7 @@ class LeroHelper():
         return run_args
 
     def run_pairwise(self, q, fp, run_args, output_query_latency_file, exploratory_query_latency_file, pool):
+        print("---------------- run_pairwise ----------------")
         explain_query(q, run_args)
         policy_entities = []
         with open(self.lero_card_file_path, 'r') as f:

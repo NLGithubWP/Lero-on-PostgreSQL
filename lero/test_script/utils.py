@@ -29,6 +29,7 @@ def run_query(q, run_args):
         cur.execute(q)
         print(f"------------ Done Explaining the query {q} ------------")
         result = cur.fetchall()
+        print(f"------------ Done fetchall the query {q} ------------")
     finally:
         
         conn.close()
@@ -181,7 +182,7 @@ def do_run_query(sql, query_name, run_args, latency_file, write_latency_file = T
                 fcntl.flock(f, fcntl.LOCK_UN)
 
         exec_time = latency_json[0]["Execution Time"]
-        print(time(), query_name, exec_time, flush=True)
+        print("after writting write_latency_file", time(), query_name, exec_time, flush=True)
     except Exception as e:
         with open(latency_file + "_error", "a+") as f:
             fcntl.flock(f, fcntl.LOCK_EX)
