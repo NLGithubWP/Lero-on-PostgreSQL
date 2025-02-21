@@ -6,6 +6,10 @@ from config import *
 import fcntl
 import psycopg2
 
+def time_sleep():
+    import time
+    time.sleep(1.5)
+
 def encode_str(s):
     md5 = hashlib.md5()
     md5.update(s.encode('utf-8'))
@@ -26,6 +30,7 @@ def run_query(q, run_args):
         # print(run_args)
         # print(q)
         print(f"------------ Explaining the query {q} ------------")
+        time_sleep()
         cur.execute(q)
         print(f"------------ Done Explaining the query {q} ------------")
         result = cur.fetchall()
