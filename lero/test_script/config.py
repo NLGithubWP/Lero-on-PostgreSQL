@@ -3,9 +3,9 @@ PORT = 5432
 HOST = "localhost"
 USER = "postgres"
 PASSWORD = "123"
-DB = "tpch"
+DB = "imdb_ori"
 CONNECTION_STR = "dbname=" + DB + " user=" + USER + " password=" + PASSWORD + " host=localhost port=" + str(PORT)
-TIMEOUT = 30000000
+TIMEOUT = 180000
 # [important]
 # the data directory of your Postgres in which the database data will live 
 # you can execute "show data_directory" in psql to get it
