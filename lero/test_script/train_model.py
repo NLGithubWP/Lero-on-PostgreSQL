@@ -174,7 +174,7 @@ if __name__ == "__main__":
     output_query_latency_file = args.output_query_latency_file
     print("output_query_latency_file:", output_query_latency_file)
 
-    pool_num = 10
+    pool_num = 1
     if args.pool_num:
         pool_num = args.pool_num
     print("pool_num:", pool_num)
