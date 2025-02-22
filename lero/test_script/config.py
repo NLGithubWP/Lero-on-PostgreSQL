@@ -3,10 +3,10 @@ PORT = 5432
 HOST = "localhost"
 USER = "postgres"
 PASSWORD = "123"
-# DB = "imdb_ori"
+DB = "imdb_ori"
 # DB = "imdb_01v2"
 # DB = "imdb_05v2"
-DB = "imdb_07v2"
+# DB = "imdb_07v2"
 CONNECTION_STR = "dbname=" + DB + " user=" + USER + " password=" + PASSWORD + " host=localhost port=" + str(PORT)
 TIMEOUT = 180000
 # [important]
