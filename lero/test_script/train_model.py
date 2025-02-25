@@ -156,7 +156,8 @@ if __name__ == "__main__":
                         help="Load the test queries")
     parser.add_argument("--algo", type=str)
     parser.add_argument("--query_num_per_chunk", type=int)
-    parser.add_argument("--output_query_latency_file", metavar="PATH")
+    parser.add_argument("--output_qu"
+                        "ery_latency_file", metavar="PATH")
     parser.add_argument("--model_prefix", type=str)
     parser.add_argument("--pool_num", type=int)
     parser.add_argument("--topK", type=int)
