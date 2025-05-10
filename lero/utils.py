@@ -5,9 +5,9 @@ import os
 from feature import JOIN_TYPES, SCAN_TYPES
 
 
-def read_config():
+def read_config(config_name):
     config = configparser.ConfigParser()
-    config.read("server.conf")
+    config.read(config_name)
 
     if "lero" not in config:
         print("server.conf does not have a [lero] section.")
