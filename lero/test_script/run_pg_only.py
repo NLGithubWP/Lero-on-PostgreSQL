@@ -9,7 +9,7 @@ parser.add_argument("--dbname", type=str, required=True, help="Name of the datab
 args = parser.parse_args()
 
 # Database configuration
-PORT = 5432
+PORT = 5434
 HOST = "localhost"
 USER = "postgres"
 PASSWORD = "123"
