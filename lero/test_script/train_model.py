@@ -84,7 +84,7 @@ class LeroHelper():
     def load_model(self, model_name):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((LERO_SERVER_HOST, LERO_SERVER_PORT))
-        json_str = json.dumps({"msg_type":"load", "model_path": os.path.abspath("/app/AI4QueryOptimizer/baseline/Lero/lero/" + model_name)})
+        json_str = json.dumps({"msg_type":"load", "model_path": os.path.abspath(LERO_SERVER_PATH + model_name)})
         print("load_model", json_str)
 
         s.sendall(bytes(json_str + "*LERO_END*", "utf-8"))

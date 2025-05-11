@@ -102,7 +102,7 @@ def training_pairwise(tuning_model_path, model_name, training_data_file, pretrai
         lero_model = LeroModelPairWise(feature_generator)
     lero_model.fit(X1, X2, Y1, Y2, tuning_model)
 
-    print(f"saving model... {directory}/{model_name}")
+    print(f"saving model... {model_name}")
     lero_model.save(model_name)
 
 
