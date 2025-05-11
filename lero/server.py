@@ -28,7 +28,7 @@ class LeroJSONHandler(socketserver.BaseRequestHandler):
                         self.handle_msg(json_msg)
                         break
                     except json.decoder.JSONDecodeError as e:
-                        print(str(e))
+                        print("handle error", str(e))
                         print_log(
                             "Error decoding JSON:" + json_msg.replace("\"", "\'"), "./server.log", True)
                         break
@@ -60,7 +60,7 @@ class LeroJSONHandler(socketserver.BaseRequestHandler):
         except Exception as e:
             reply_msg['msg_type'] = "error"
             reply_msg['error'] = str(e)
-            print(e)
+            print("handle_msg error", e)
 
         self.request.sendall(bytes(json.dumps(reply_msg), "utf-8"))
         self.request.close()
