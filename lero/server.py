@@ -60,7 +60,7 @@ class LeroJSONHandler(socketserver.BaseRequestHandler):
         except Exception as e:
             reply_msg['msg_type'] = "error"
             reply_msg['error'] = str(e)
-            print("handle_msg error", e)
+            print("handle_msg error", e, reply_msg)
 
         self.request.sendall(bytes(json.dumps(reply_msg), "utf-8"))
         self.request.close()
