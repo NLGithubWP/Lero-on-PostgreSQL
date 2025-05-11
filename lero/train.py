@@ -3,7 +3,7 @@ import math
 
 from feature import *
 from model import LeroModel, LeroModelPairWise
-
+import os
 
 def _load_pointwise_plans(path):
     with open(path, "r") as f:
@@ -72,6 +72,7 @@ def compute_rank_score(path, pretrain=False, rank_score_type=0):
 
 
 def training_pairwise(tuning_model_path, model_name, training_data_file, pretrain=False):
+    directory = os.path.dirname(training_data_file)
     print(f"loading training_data_file from {training_data_file}")
     X1, X2 = _load_pairwise_plans(training_data_file)
 
@@ -101,7 +102,7 @@ def training_pairwise(tuning_model_path, model_name, training_data_file, pretrai
         lero_model = LeroModelPairWise(feature_generator)
     lero_model.fit(X1, X2, Y1, Y2, tuning_model)
 
-    print(f"saving model... {model_name}")
+    print(f"saving model... {directory}/{model_name}")
     lero_model.save(model_name)
 
 
