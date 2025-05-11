@@ -170,7 +170,7 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="Run the server with a specified config and task.")
     parser.add_argument("--config_name", type=str, required=False, default="server.conf", help="Name of the configuration file to use")
-    args = parser.parse_args()t
+    args = parser.parse_args()
 
     config = read_config(args.config_name)
     port = int(config["Port"])
