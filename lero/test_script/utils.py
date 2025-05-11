@@ -31,7 +31,6 @@ def run_query(q, run_args):
         # print(run_args)
         # print(q)
         print(f"------------ Explaining the query {q} ------------")
-        time_sleep()
         cur.execute(q)
         print(f"------------ Done Explaining the query {q} ------------")
         result = cur.fetchall()
