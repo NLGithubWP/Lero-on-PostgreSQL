@@ -30,11 +30,11 @@ def run_query(q, run_args):
         cur.execute("SET statement_timeout TO " + str(TIMEOUT))
         # print(run_args)
         # print(q)
-        print(f"------------ Explaining the query {q[:50]} ------------")
+        print(f"------------ Explaining the query {q} ------------")
         cur.execute(q)
-        print(f"------------ Done Explaining the query {q[:50]} ------------")
+        print(f"------------ Done Explaining the query {q} ------------")
         result = cur.fetchall()
-        print(f"------------ Done fetchall the query {q[:50]} ------------")
+        print(f"------------ Done fetchall the query {q} ------------")
     finally:
         
         conn.close()
