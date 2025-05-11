@@ -1,6 +1,6 @@
 import json
 import socketserver
-
+import traceback
 from card_picker import CardPicker
 from model import LeroModel
 from test_script.config import LERO_DUMP_CARD_FILE
@@ -61,6 +61,7 @@ class LeroJSONHandler(socketserver.BaseRequestHandler):
             reply_msg['msg_type'] = "error"
             reply_msg['error'] = str(e)
             print("handle_msg error", e, msg_type)
+            traceback.print_exc()
 
         self.request.sendall(bytes(json.dumps(reply_msg), "utf-8"))
         self.request.close()
