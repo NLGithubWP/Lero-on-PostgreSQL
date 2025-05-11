@@ -10,7 +10,7 @@ args = parser.parse_args()
 
 # Database configuration
 PORT = 5434
-HOST = "localhost"
+HOST = "172.17.0.1"
 USER = "postgres"
 PASSWORD = "123"
 DB = args.dbname

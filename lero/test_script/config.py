@@ -9,7 +9,7 @@ DB = "imdb_ori"
 # DB = "imdb_07v2"
 
 
-CONNECTION_STR = "dbname=" + DB + " user=" + USER + " password=" + PASSWORD + " host=localhost port=" + str(PORT)
+CONNECTION_STR = "dbname=" + DB + " user=" + USER + " password=" + PASSWORD + " host=172.17.0.1 port=" + str(PORT)
 TIMEOUT = 180000
 # [important]
 # the data directory of your Postgres in which the database data will live 
