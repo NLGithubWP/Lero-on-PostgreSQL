@@ -4,9 +4,6 @@ HOST = "172.17.0.1"
 USER = "postgres"
 PASSWORD = "postgres"
 DB = "imdb_ori"
-# DB = "imdb_01v2"
-# DB = "imdb_05v2"
-# DB = "imdb_07v2"
 
 
 CONNECTION_STR = "dbname=" + DB + " user=" + USER + " password=" + PASSWORD + " host=172.17.0.1 port=" + str(PORT)
