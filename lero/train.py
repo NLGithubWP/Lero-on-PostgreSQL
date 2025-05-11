@@ -72,6 +72,7 @@ def compute_rank_score(path, pretrain=False, rank_score_type=0):
 
 
 def training_pairwise(tuning_model_path, model_name, training_data_file, pretrain=False):
+    print(f"loading training_data_file from {training_data_file}")
     X1, X2 = _load_pairwise_plans(training_data_file)
 
     tuning_model = tuning_model_path is not None
