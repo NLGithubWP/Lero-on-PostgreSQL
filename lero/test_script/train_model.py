@@ -110,7 +110,10 @@ class LeroHelper():
 
     def run_pairwise(self, q, fp, run_args, output_query_latency_file, exploratory_query_latency_file, pool):
         print("---------------- run_pairwise (SEQUENTIAL MODE) ----------------")
-        explain_query(q, run_args)
+        try:
+            explain_query(q, run_args)
+        except Exception as e:
+            print("Running sql error", q, e)
         policy_entities = []
         with open(self.lero_card_file_path, 'r') as f:
             lines = f.readlines()
