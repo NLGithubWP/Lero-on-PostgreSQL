@@ -29,4 +29,6 @@ if __name__ == "__main__":
             # waiting for db restart ec.
             time.sleep(60)
 
+        time.sleep(3)
+
 
