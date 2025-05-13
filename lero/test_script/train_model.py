@@ -64,7 +64,9 @@ class LeroHelper():
 
             model_name = self.model_prefix + "_" + str(c_idx)
             self.retrain(model_name)
-            self.test_benchmark(self.output_query_latency_file + "_" + model_name)
+
+            # todo: skip the teting for each train
+            # self.test_benchmark(self.output_query_latency_file + "_" + model_name)
 
     def retrain(self, model_name):
         training_data_file = self.output_query_latency_file + ".training"
