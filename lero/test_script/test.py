@@ -19,11 +19,14 @@ if __name__ == "__main__":
             test_queries.append((arr[0], arr[1]))
     print("Read", len(test_queries), "test queries.")
 
+    import time
     for (fp, q) in test_queries:
         try:
             do_run_query(q, fp, ["SET enable_lero TO True"], args.output_query_latency_file, True, None, None)
         except:
             print('Error', fp)
             traceback.print_exc()
+            # waiting for db restart ec.
+            time.sleep(60)
 
 
