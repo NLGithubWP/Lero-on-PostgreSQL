@@ -7,7 +7,8 @@ DB = "imdb_ori"
 
 
 CONNECTION_STR = "dbname=" + DB + " user=" + USER + " password=" + PASSWORD + " host=172.17.0.1 port=" + str(PORT)
-TIMEOUT = 180000
+# TIMEOUT = 180000
+TIMEOUT = 360000
 # [important]
 # the data directory of your Postgres in which the database data will live 
 # you can execute "show data_directory" in psql to get it
