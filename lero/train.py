@@ -1,9 +1,10 @@
 import argparse
 import math
+import json
+import os
 
 from feature import *
 from model import LeroModel, LeroModelPairWise
-import os
 
 def _load_pointwise_plans(path):
     with open(path, "r") as f:
@@ -36,6 +37,18 @@ def get_training_pair(candidates):
             j += 1
         i += 1
     return X1, X2
+
+
+def load_training_data(data_dir):
+    """Load training data from the specified directory"""
+    training_file = os.path.join(data_dir, "training_data.txt")
+    X1, X2 = _load_pairwise_plans(training_file)
+    
+    # Extract execution times as labels
+    Y1 = [json.loads(x)[0]['Execution Time'] for x in X1]
+    Y2 = [json.loads(x)[0]['Execution Time'] for x in X2]
+    
+    return X1, X2, Y1, Y2
 
 
 def compute_rank_score(path, pretrain=False, rank_score_type=0):
@@ -71,39 +84,17 @@ def compute_rank_score(path, pretrain=False, rank_score_type=0):
     return X, Y
 
 
-def training_pairwise(tuning_model_path, model_name, training_data_file, pretrain=False):
-    directory = os.path.dirname(training_data_file)
-    print(f"loading training_data_file from {training_data_file}")
-    X1, X2 = _load_pairwise_plans(training_data_file)
-
-    tuning_model = tuning_model_path is not None
-    lero_model = None
-    if tuning_model:
-        lero_model = LeroModelPairWise(None)
-        lero_model.load(tuning_model_path)
-        feature_generator = lero_model._feature_generator
-    else:
-        feature_generator = FeatureGenerator()
-        feature_generator.fit(X1 + X2)
-
-    Y1, Y2 = None, None
-    if pretrain:
-        Y1 = [json.loads(c)[0]['Plan']['Total Cost'] for c in X1]
-        Y2 = [json.loads(c)[0]['Plan']['Total Cost'] for c in X2]
-        X1, _ = feature_generator.transform(X1)
-        X2, _ = feature_generator.transform(X2)
-    else:
-        X1, Y1 = feature_generator.transform(X1)
-        X2, Y2 = feature_generator.transform(X2)
-    print("Training data set size = " + str(len(X1)))
-
-    if not tuning_model:
-        assert lero_model == None
-        lero_model = LeroModelPairWise(feature_generator)
-    lero_model.fit(X1, X2, Y1, Y2, tuning_model)
-
-    print(f"saving model... {model_name}")
-    lero_model.save(model_name)
+def training_pairwise(X1, X2, Y1, Y2, model, pre_training=False, history_file=None):
+    """Train the model using pairwise ranking approach"""
+    history = model.fit(X1, X2, Y1, Y2, pre_training)
+    
+    # Save training history to file
+    if history_file:
+        with open(history_file, 'w') as f:
+            json.dump(history, f, indent=2)
+        print(f"Training history saved to {history_file}")
+    
+    return history
 
 
 def training_with_rank_score(tuning_model_path, model_name, training_data_file, pretrain=False, rank_score_type=0):
@@ -128,10 +119,12 @@ def training_with_rank_score(tuning_model_path, model_name, training_data_file, 
         assert lero_model == None
         lero_model = LeroModel(feature_generator)
 
-    lero_model.fit(local_features, Y, tuning_model)
+    history = lero_model.fit(local_features, Y, tuning_model)
 
     print(f"saving model... {model_name}")
     lero_model.save(model_name)
+
+    return history
 
 
 def training_pointwise(tuning_model_path, model_name, training_data_file):
@@ -155,67 +148,49 @@ def training_pointwise(tuning_model_path, model_name, training_data_file):
         assert lero_model == None
         lero_model = LeroModel(feature_generator)
 
-    lero_model.fit(local_features, y, tuning_model)
+    history = lero_model.fit(local_features, y, tuning_model)
 
     print(f"saving model... {model_name}")
     lero_model.save(model_name)
 
+    return history
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser("Model training helper")
-    parser.add_argument("--training_data",
-                        metavar="PATH",
-                        help="Load the queries")
-    parser.add_argument("--training_type", type=int)
-    parser.add_argument("--model_name", type=str)
-    parser.add_argument("--pretrain_model_name", type=str)
-    parser.add_argument("--rank_score_training_type", type=int)
 
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--data_dir', type=str, required=True,
+                      help='Directory containing training data')
+    parser.add_argument('--model_dir', type=str, required=True,
+                      help='Directory to save trained model')
+    parser.add_argument('--history_file', type=str,
+                      help='File to save training history')
+    parser.add_argument('--pre_training', action='store_true',
+                      help='Whether this is pre-training phase')
     args = parser.parse_args()
 
-    training_type = 0
-    if args.training_type is not None:
-        training_type = args.training_type
-    print("training_type:", training_type)
+    # Load training data
+    X1, X2, Y1, Y2 = load_training_data(args.data_dir)
+    
+    # Initialize feature generator and model
+    feature_generator = FeatureGenerator()
+    feature_generator.fit(X1 + X2)
+    model = LeroModelPairWise(feature_generator)
+    
+    # Train model
+    history = training_pairwise(X1, X2, Y1, Y2, model, args.pre_training, args.history_file)
+    
+    # Save model
+    model.save(args.model_dir)
+    print(f"Model saved to {args.model_dir}")
+    
+    # Print final metrics
+    final_metrics = history[-1]
+    print("\nFinal Training Metrics:")
+    print(f"Epoch: {final_metrics['epoch']}")
+    print(f"Iteration: {final_metrics['iteration']}")
+    print(f"Loss: {final_metrics['loss']:.4f}")
+    print(f"Accuracy: {final_metrics['accuracy']:.4f}")
 
-    training_data = None
-    if args.training_data is not None:
-        training_data = args.training_data
-    print("training_data:", training_data)
 
-    model_name = None
-    if args.model_name is not None:
-        model_name = args.model_name
-    print("model_name:", model_name)
-
-    pretrain_model_name = None
-    if args.pretrain_model_name is not None:
-        pretrain_model_name = args.pretrain_model_name
-    print("pretrain_model_name:", pretrain_model_name)
-
-    rank_score_training_type = 0
-    if args.rank_score_training_type is not None:
-        rank_score_training_type = args.rank_score_training_type
-    print("rank_score_training_type:", rank_score_training_type)
-
-    if training_type == 0:
-        print("training_pointwise")
-        training_pointwise(pretrain_model_name, model_name, training_data)
-    elif training_type == 1:
-        print("training_pairwise")
-        training_pairwise(pretrain_model_name, model_name,
-                          training_data, False)
-    elif training_type == 2:
-        print("training_with_rank_score")
-        training_with_rank_score(
-            pretrain_model_name, model_name, training_data, False, rank_score_training_type)
-    elif training_type == 3:
-        print("pre-training_pairwise")
-        training_pairwise(pretrain_model_name, model_name,
-                          training_data, True)
-    elif training_type == 4:
-        print("pre-training_with_rank_score")
-        training_with_rank_score(
-            pretrain_model_name, model_name, training_data, True, rank_score_training_type)
-    else:
-        raise Exception()
+if __name__ == '__main__':
+    main()
