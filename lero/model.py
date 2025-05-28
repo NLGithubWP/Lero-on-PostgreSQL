@@ -270,14 +270,14 @@ class LeroModelPairWise(LeroModel):
         history = []
         sigmoid = nn.Sigmoid()
         start_time = time()
-        iteration = 0
+        total_iteration = 0
         
         for epoch in range(100):
             epoch_loss = 0
             epoch_correct = 0
             epoch_total = 0
             
-            for x1, x2, label in dataset:
+            for batch_idx, (x1, x2, label) in enumerate(dataset):
                 tree_x1, tree_x2 = None, None
                 if CUDA:
                     tree_x1 = self._net.module.build_trees(x1)
@@ -308,10 +308,11 @@ class LeroModelPairWise(LeroModel):
                 epoch_correct += batch_correct
                 epoch_total += batch_total
 
-                # Record metrics for this iteration
+                # Record metrics for this batch
                 history.append({
                     'epoch': epoch,
-                    'iteration': iteration,
+                    'iteration': total_iteration,
+                    'batch': batch_idx,
                     'loss': batch_loss,
                     'accuracy': batch_correct / batch_total if batch_total > 0 else 0
                 })
@@ -325,7 +326,7 @@ class LeroModelPairWise(LeroModel):
                     loss.backward()
                     optimizer.step()
                 
-                iteration += 1
+                total_iteration += 1
 
             # Calculate and print epoch-level metrics
             epoch_loss /= len(dataset)
