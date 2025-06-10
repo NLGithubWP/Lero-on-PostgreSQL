@@ -46,11 +46,65 @@ class LeroHelper():
         self.topK = topK
         self.lero_server_path = LERO_SERVER_PATH
         self.lero_card_file_path = os.path.join(LERO_SERVER_PATH, LERO_DUMP_CARD_FILE)
+        self._ALL_OPTIONS = [
+            "enable_nestloop", "enable_hashjoin", "enable_mergejoin",
+            "enable_seqscan", "enable_indexscan", "enable_indexonlyscan"
+        ]
 
     def chunks(self, lst, n):
         """Yield successive n-sized chunks from lst."""
         for i in range(0, len(lst), n):
             yield lst[i:i + n]
+
+    def _arm_idx_to_hints(self, arm_idx):
+        hints = []
+        for option in self._ALL_OPTIONS:
+            hints.append(f"SET {option} TO off")
+
+        if arm_idx == 0:
+            for option in self._ALL_OPTIONS:
+                hints.append(f"SET {option} TO on")
+        elif arm_idx == 1:
+            hints.append("SET enable_hashjoin TO on")
+            hints.append("SET enable_indexonlyscan TO on")
+            hints.append("SET enable_indexscan TO on")
+            hints.append("SET enable_mergejoin TO on")
+            hints.append("SET enable_seqscan TO on")
+        elif arm_idx == 2:
+            hints.append("SET enable_hashjoin TO on")
+            hints.append("SET enable_indexonlyscan TO on")
+            hints.append("SET enable_nestloop TO on")
+            hints.append("SET enable_seqscan TO on")
+        elif arm_idx == 3:
+            hints.append("SET enable_hashjoin TO on")
+            hints.append("SET enable_indexonlyscan TO on")
+            hints.append("SET enable_seqscan TO on")
+        elif arm_idx == 4:
+            hints.append("SET enable_hashjoin TO on")
+            hints.append("SET enable_indexonlyscan TO on")
+            hints.append("SET enable_indexscan TO on")
+            hints.append("SET enable_nestloop TO on")
+            hints.append("SET enable_seqscan TO on")
+        else:
+            raise Exception("Only supports the first 5 arms")
+        return hints
+
+    def run_pairwise_with_hints(self, q, fp, run_args, output_query_latency_file, exploratory_query_latency_file, pool):
+        print("---------------- run_pairwise_with_hints (SEQUENTIAL MODE) ----------------")
+        try:
+            # First run with default settings (all options on)
+            default_hints = self._arm_idx_to_hints(0)
+            default_run_args = run_args + default_hints
+            do_run_query(q, fp, default_run_args, output_query_latency_file, True, None, None)
+
+            # Then run with different hint combinations
+            for arm_idx in range(1, 5):  # Try arms 1-4
+                hints = self._arm_idx_to_hints(arm_idx)
+                current_run_args = run_args + hints
+                do_run_query(q, fp, current_run_args, exploratory_query_latency_file, True, None, None)
+
+        except Exception as e:
+            print("Running sql error", q, e)
 
     def start(self, pool_num):
         lero_chunks = list(self.chunks(self.queries, self.query_num_per_chunk))
@@ -59,8 +113,11 @@ class LeroHelper():
         print("---------------- starts LeroHelper (SEQUENTIAL MODE) ----------------")
         for c_idx, chunk in enumerate(lero_chunks):
             for fp, q in chunk:
-                self.run_pairwise(q, fp, run_args, self.output_query_latency_file,
-                                  self.output_query_latency_file + "_exploratory", None)  # ❌ No pool, run synchronously
+                # self.run_pairwise(q, fp, run_args, self.output_query_latency_file,
+                #                   self.output_query_latency_file + "_exploratory", None)  # ❌ No pool, run synchronously
+
+                self.run_pairwise_with_hints(q, fp, run_args, self.output_query_latency_file,
+                                          self.output_query_latency_file + "_exploratory", None)
 
             model_name = self.model_prefix + "_" + str(c_idx)
             self.retrain(model_name)
